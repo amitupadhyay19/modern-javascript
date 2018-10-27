@@ -5,7 +5,12 @@ function Client(name, balance) {
     this.balance = balance;   
 }
 
+// with constructor => you can separate the functions with object constructor, code more organized
+// membership function attached to client constructor
+
+
 // Attach the prototype to the method (membership = method name)
+//same name as client 
 Client.prototype.membership = function() {
     let name;
     // check for the balance
@@ -18,7 +23,8 @@ Client.prototype.membership = function() {
     } 
     return name;
 } 
-
+// you can access other properties in the same object or
+// you can also access other prototypes function in the same object
 // second prototype with same name and balance
 Client.prototype.clientInfo = function() {
     return `Name: ${this.name}, Balance: ${this.balance},
@@ -41,26 +47,31 @@ Client.prototype.getBalance = function() {
 }
 
 
+
 // new instance of client
 const person = new Client('Amit', '2000');
 const person2 = new Client('Rahul', '600'); 
 
+console.log(Client.prototype);
 
-// Business // functions with more parameters
-function Business(name, balance, phone, category) {
-    Client.call(this, name, balance); // calling name and balance from client constructors
-    this.phone = phone;
-    this.category = category;
-}
+console.log(person);
+console.log(person.membership() );
+console.log(person.clientInfo() );
+person.withdraw(1000);
+console.log(person.clientInfo() );
+console.log(person.getBalance() );
+person.deposit(500);
+console.log(person.clientInfo() );
+console.log(person.getBalance() );
 
-// inherit the prototypes // adding new prototypes into business
-Business.prototype = Object.create(Client.prototype);
+console.log('--------')
 
-// return the constructor as business // changing from client to business
-Business.prototype.constructor = Business;
-
-// create a business
-const business = new Business('Udemy', 100000, 9999998888, 'Education');
-
-console.log(business);
-console.log(business.clientInfo());
+console.log(person2);
+console.log(person2.membership() );
+console.log(person2.clientInfo() );
+person2.withdraw(100);
+console.log(person2.clientInfo() );
+console.log(person2.getBalance() );
+person2.deposit(500);
+console.log(person2.clientInfo() );
+console.log(person2.getBalance() );
